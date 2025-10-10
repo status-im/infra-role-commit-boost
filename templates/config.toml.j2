@@ -1,0 +1,30 @@
+chain = '{{ commit_boost_network }}'
+
+[pbs]
+docker_image = '{{ commit_boost_cont_image }}'
+host = '{{ commit_boost_cont_host }}'
+port = {{ commit_boost_cont_port }}
+
+{% for relay in commit_boost_relays %}
+[[relays]]
+id = '{{ relay.id }}'
+url = '{{ relay.url }}'
+{% endfor %}
+
+[metrics]
+enabled = {{ commit_boost_cont_metrics_enabled }}
+host = '{{ commit_boost_cont_host }}'
+start_port = {{ commit_boost_cont_metrics_port }}
+
+[logs.stdout]
+enabled = {{ commit_boost_cont_logs_stdout_enabled }}
+level = '{{ commit_boost_cont_logs_level }}'
+use_json = {{ commit_boost_cont_logs_json }}
+color = {{ commit_boost_cont_logs_color }}
+
+[logs.file]
+enabled = {{ 'false' if commit_boost_cont_logs_stdout_enabled else 'true' }}
+{% if not commit_boost_cont_logs_stdout_enabled %}
+level = '{{ commit_boost_cont_logs_level }}'
+path = '{{ commit_boost_cont_logs_file_path | default("/var/log/commit-boost") }}'
+{% endif %}

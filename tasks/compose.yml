@@ -1,0 +1,31 @@
+---
+- name: Create directories
+  ansible.builtin.file:
+    path: '{{ commit_boost_service_path }}'
+    owner: 'dockremap'
+    group: 'docker'
+    mode: "0750"
+    state: 'directory'
+
+- name: Create compose and config files
+  ansible.builtin.template:
+    src: 'docker-compose.yml.j2'
+    dest: '{{ commit_boost_compose_file }}'
+    owner: 'dockremap'
+    group: 'docker'
+    mode: "0640"
+  
+- name: Create compose and config files
+  ansible.builtin.template:
+    src: '{{ item }}.j2'
+    dest: '{{ commit_boost_service_path }}/{{ item }}'
+    owner: 'dockremap'
+    group: 'docker'
+    mode: "0640"
+  loop:
+    - 'docker-compose.yml'
+    - 'config.toml'
+
+- name: Create containers
+  community.docker.docker_compose_v2:
+    project_src: '{{ commit_boost_service_path }}'

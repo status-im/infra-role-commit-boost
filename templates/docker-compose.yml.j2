@@ -1,0 +1,24 @@
+---
+services:
+  commit-boost:
+    container_name: '{{ commit_boost_cont_name }}'
+    image: '{{ commit_boost_cont_image }}'
+    restart: 'always'
+    ports:
+      - '{{ commit_boost_cont_host }}:{{ commit_boost_cont_port}}:{{ commit_boost_cont_port }}'
+      - '{{ commit_boost_cont_host }}:{{ commit_boost_cont_metrics_port}}:{{ commit_boost_cont_metrics_port }}'
+    volumes:
+    - '{{ commit_boost_config_file }}:/cb-config.toml:ro'
+    environment:
+      CB_CONFIG: '/cb-config.toml'
+      CB_METRICS_PORT: '{{ commit_boost_cont_metrics_port}}'
+      CB_PBS_ENDPOINT: ' {{ commit_boost_cont_host }}:{{ commit_boost_cont_port }}'
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://{{ commit_boost_cont_host }}:{{ commit_boost_cont_port }}/eth/v1/builder/status']
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+
+

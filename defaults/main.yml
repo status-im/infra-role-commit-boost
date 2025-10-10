@@ -1,0 +1,39 @@
+---
+# General
+commit_boost_service_name: 'commit-boost'
+commit_boost_service_path: '/data/{{ commit_boost_service_name }}'
+commit_boost_compose_file: '{{ commit_boost_service_path }}/docker-compose.yml'
+commit_boost_config_file:  '{{ commit_boost_service_path }}/config.toml'
+
+# Container
+commit_boost_cont_name: '{{ commit_boost_service_name }}'
+commit_boost_cont_tag: '0.8.0'
+commit_boost_cont_image: 'ghcr.io/commit-boost/pbs:{{ commit_boost_cont_tag }}'
+commit_boost_cont_host: '0.0.0.0'
+commit_boost_cont_port: 18550
+
+# Metrics
+commit_boost_cont_metrics_enabled: true
+commit_boost_cont_metrics_port: 10000
+
+# Logs
+commit_boost_cont_logs_stdout_enabled: true
+commit_boost_cont_logs_level: 'info'
+commit_boost_cont_logs_json: false
+commit_boost_cont_logs_color: false
+
+# commit-boost
+#commit_boost_network: 'holesky'
+#commit_boost_relays:
+#  - id:  'titan'
+#    url: 'https://0xaa58208899c6105603b74396734a6263cc7d947f444f396a90f7b7d3e65d102aec7e5e5291b27e08d02c50a050825c2f@holesky.titanrelay.xyz'
+
+# Consul service definition settings
+commit_boost_consul_service_name: '{{ commit_boost_service_name }}'
+commit_boost_consul_service_file_name: '{{ commit_boost_service_name | replace("-", "_") }}'
+commit_boost_consul_check_disabled: false
+commit_boost_consul_check_interval: '60s'
+commit_boost_consul_check_timeout: '5s'
+commit_boost_consul_success_before_passing: 0
+commit_boost_consul_failures_before_warning: 1
+commit_boost_consul_failures_before_critical: 2

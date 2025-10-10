@@ -1,0 +1,22 @@
+---
+- name: Create Consul service definition
+  include_role: name=infra-role-consul-service
+  vars:
+    consul_config_name:                      '{{ commit_boost_consul_service_file_name }}'
+    consul_default_check_disabled:           '{{ commit_boost_consul_check_disabled }}'
+    consul_default_check_interval:           '{{ commit_boost_consul_check_interval }}'
+    consul_default_check_timeout:            '{{ commit_boost_consul_check_timeout }}'
+    consul_default_success_before_passing:   '{{ commit_boost_consul_success_before_passing }}'
+    consul_default_failures_before_warning:  '{{ commit_boost_consul_failures_before_warning }}'
+    consul_default_failures_before_critical: '{{ commit_boost_consul_failures_before_critical }}'
+    consul_services:
+      - id:   '{{ commit_boost_service_name }}'
+        name: '{{ commit_boost_consul_service_name }}'
+        port: '{{ commit_boost_cont_port }}'
+        tags: ['{{ env }}.{{ stage }}', 'commit-boost']
+        meta:
+          version: '{{ commit_boost_cont_tag }}'
+        checks:
+          - id:   '{{ commit_boost_service_name }}-health'
+            type: 'http'
+            http: 'http://localhost:{{ commit_boost_cont_port }}/eth/v1/builder/status'
