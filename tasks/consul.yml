@@ -13,6 +13,7 @@
       - id:   '{{ commit_boost_service_name }}'
         name: '{{ commit_boost_consul_service_name }}'
         port: '{{ commit_boost_cont_port }}'
+        address: '{{ ansible_local.wireguard.address }}'
         tags: ['{{ env }}.{{ stage }}', 'commit-boost']
         meta:
           version: '{{ commit_boost_cont_tag }}'
@@ -20,3 +21,9 @@
           - id:   '{{ commit_boost_service_name }}-health'
             type: 'http'
             http: 'http://localhost:{{ commit_boost_cont_port }}/eth/v1/builder/status'
+
+      - id:   '{{ commit_boost_service_name }}-metrics'
+        name: '{{ commit_boost_consul_service_name }}-metrics'
+        port:    '{{ commit_boost_cont_metrics_port }}'
+        address: '{{ ansible_local.wireguard.address }}'
+        tags: ['{{ env }}.{{ stage }}', 'commit-boost', 'metrics']

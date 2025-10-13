@@ -12,7 +12,6 @@ services:
     environment:
       CB_CONFIG: '/cb-config.toml'
       CB_METRICS_PORT: '{{ commit_boost_cont_metrics_port}}'
-      CB_PBS_ENDPOINT: ' {{ commit_boost_cont_host }}:{{ commit_boost_cont_port }}'
     healthcheck:
       test: ['CMD', 'curl', '-f', 'http://{{ commit_boost_cont_host }}:{{ commit_boost_cont_port }}/eth/v1/builder/status']
       interval: 30s

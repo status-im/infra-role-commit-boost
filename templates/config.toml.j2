@@ -12,15 +12,15 @@ url = '{{ relay.url }}'
 {% endfor %}
 
 [metrics]
-enabled = {{ commit_boost_cont_metrics_enabled }}
+enabled = {{ commit_boost_cont_metrics_enabled | lower }}
 host = '{{ commit_boost_cont_host }}'
 start_port = {{ commit_boost_cont_metrics_port }}
 
 [logs.stdout]
-enabled = {{ commit_boost_cont_logs_stdout_enabled }}
+enabled = {{ commit_boost_cont_logs_stdout_enabled | lower }}
 level = '{{ commit_boost_cont_logs_level }}'
-use_json = {{ commit_boost_cont_logs_json }}
-color = {{ commit_boost_cont_logs_color }}
+use_json = {{ commit_boost_cont_logs_json | lower }}
+color = {{ commit_boost_cont_logs_color | lower }}
 
 [logs.file]
 enabled = {{ 'false' if commit_boost_cont_logs_stdout_enabled else 'true' }}

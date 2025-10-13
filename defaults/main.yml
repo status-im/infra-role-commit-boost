@@ -7,7 +7,7 @@ commit_boost_config_file:  '{{ commit_boost_service_path }}/config.toml'
 
 # Container
 commit_boost_cont_name: '{{ commit_boost_service_name }}'
-commit_boost_cont_tag: '0.8.0'
+commit_boost_cont_tag: 'v0.8.0'
 commit_boost_cont_image: 'ghcr.io/commit-boost/pbs:{{ commit_boost_cont_tag }}'
 commit_boost_cont_host: '0.0.0.0'
 commit_boost_cont_port: 18550
