@@ -23,6 +23,7 @@ commit_boost_cont_logs_json: false
 commit_boost_cont_logs_color: false
 
 # commit-boost
+commit_boost_late_in_slot_time_ms: 2000
 #commit_boost_network: 'holesky'
 #commit_boost_relays:
 #  - id:  'titan'

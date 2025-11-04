@@ -5,6 +5,11 @@ docker_image = '{{ commit_boost_cont_image }}'
 host = '{{ commit_boost_cont_host }}'
 port = {{ commit_boost_cont_port }}
 
+# How late in milliseconds in the slot is "late". This impacts the `get_header` requests, by shortening timeouts for `get_header` calls to
+# relays and make sure a header is returned within this deadline. If the request from the CL comes later in the slot, then fetching headers is skipped
+# to force local building and miniminzing the risk of missed slots.
+late_in_slot_time_ms = {{ commit_boost_late_in_slot_time_ms }}
+
 {% for relay in commit_boost_relays %}
 [[relays]]
 id = '{{ relay.id }}'
