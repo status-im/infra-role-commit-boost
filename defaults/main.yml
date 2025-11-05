@@ -19,7 +19,7 @@ commit_boost_cont_metrics_port: 10000
 # Logs
 commit_boost_cont_logs_stdout_enabled: true
 commit_boost_cont_logs_level: 'info'
-commit_boost_cont_logs_json: false
+commit_boost_cont_logs_json: true
 commit_boost_cont_logs_color: false
 
 # commit-boost
